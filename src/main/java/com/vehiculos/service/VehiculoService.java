@@ -42,4 +42,32 @@ public class VehiculoService {
     }
     
     // ... Agrega los métodos actualizar y eliminar siguiendo el patrón del repositorio original
+
+    // ... tus métodos anteriores ...
+
+    public Vehiculo actualizarVehiculo(String id, VehiculoDTO dto) {
+        // 1. Buscamos si existe, si no, lanza error 404
+        Vehiculo vehiculo = obtenerVehiculoPorId(id);
+
+        // 2. Actualizamos los campos
+        vehiculo.setMarca(dto.getMarca());
+        vehiculo.setModelo(dto.getModelo());
+        vehiculo.setTipoLlantas(dto.getTipoLlantas());
+        vehiculo.setNumeroPuertas(dto.getNumeroPuertas());
+        vehiculo.setPlantaId(dto.getPlantaId());
+
+        // 3. Guardamos
+        return vehiculoRepository.save(vehiculo);
+    }
+
+    public void eliminarVehiculo(String id) {
+        // 1. Verificamos que exista antes de borrar
+        obtenerVehiculoPorId(id);
+        
+        // 2. Borramos
+        vehiculoRepository.deleteById(id);
+    }
 }
+
+
+
